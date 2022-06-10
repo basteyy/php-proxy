@@ -53,5 +53,3 @@ class StreamPlugin extends AbstractPlugin {
 		}
 	}
 }
-
-?>

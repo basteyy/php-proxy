@@ -128,5 +128,3 @@ class CookiePlugin extends AbstractPlugin {
 		return $data;
 	}
 }
-
-?>

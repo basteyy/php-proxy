@@ -83,21 +83,25 @@ class Proxy {
 	private $listeners = array();
 	
 	// Proxy instance itself acts as a dispatcher!
-	public function getEventDispatcher(){
+	public function getEventDispatcher(): static
+    {
 		return $this;
 	}
 	
-	public function addListener($event, $callback, $priority = 0){
+	public function addListener($event, $callback, $priority = 0): void
+    {
 		$this->listeners[$event][$priority][] = $callback;
 	}
 	
-	public function addSubscriber($subscriber){
+	public function addSubscriber($subscriber): void
+    {
 		if(method_exists($subscriber, 'subscribe')){
 			$subscriber->subscribe($this);
 		}
 	}
 	
-	private function dispatch($event_name, $event){
+	private function dispatch($event_name, $event): void
+    {
 		
 		if(isset($this->listeners[$event_name])){
 			$temp = (array)$this->listeners[$event_name];
@@ -112,7 +116,8 @@ class Proxy {
 		}
 	}
 	
-	public function forward(Request $request, $url){
+	public function forward(Request $request, $url): Response
+    {
 	
 		// change request URL
 		$request->setUrl($url);
@@ -192,5 +197,3 @@ class Proxy {
 		return $this->response;
 	}
 }
-
-?>

@@ -3,13 +3,13 @@
 namespace Proxy\Event;
 
 class ProxyEvent implements \ArrayAccess {
-	private $data;
+	private mixed $data;
 	
 	public function __construct($data = array()){
 		$this->data = $data;
 	}
 	
-	public function offsetSet($offset, $value){
+	public function offsetSet($offset, $value): void {
 		
 		if(is_null($offset)) {
 			$this->data[] = $value;
@@ -18,18 +18,17 @@ class ProxyEvent implements \ArrayAccess {
 		}
 	}
 	
-	public function offsetExists($offset){
+	public function offsetExists($offset): bool
+    {
 		return isset($this->data[$offset]);
 	}
 
-	public function offsetUnset($offset){
+	public function offsetUnset($offset): void{
 		unset($this->data[$offset]);
 	}
 
-	public function offsetGet($offset){
-		return isset($this->data[$offset]) ? $this->data[$offset] : null;
+	public function offsetGet($offset): mixed{
+		return $this->data[$offset] ?? null;
 	}
 	
 }
-
-?>

@@ -365,6 +365,3 @@ class Request {
 		return $request;
 	}
 }
-
-
-?>

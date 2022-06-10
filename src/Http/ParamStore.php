@@ -80,5 +80,3 @@ class ParamStore {
 		return json_encode($this->data, true);
 	}
 }
-
-?>

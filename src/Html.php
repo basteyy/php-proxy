@@ -178,5 +178,3 @@ class Html {
 		return $html;
 	}
 }
-
-?>

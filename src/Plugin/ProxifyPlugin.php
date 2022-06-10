@@ -201,5 +201,3 @@ class ProxifyPlugin extends AbstractPlugin {
 	}
 
 }
-
-?>
