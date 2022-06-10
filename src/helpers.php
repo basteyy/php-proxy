@@ -1,6 +1,7 @@
 <?php
 
 use Proxy\Config;
+use ProxyApp\Exceptions\TemplateMissingException;
 
 // strip away extra parameters text/html; charset=UTF-8
 function clean_content_type($content_type){
@@ -103,25 +104,6 @@ function render_string($str, $vars = array()){
 	}
 	
 	return $str;
-}
-
-function render_template($file_path, $vars = array()){
-
-	// variables to be used within that template
-	extract($vars);
-	
-	ob_start();
-	
-	if(file_exists($file_path)){
-		include($file_path);
-	} else {
-		die("Failed to load template: {$file_path}");
-	}
-	
-	$contents = ob_get_contents();
-	ob_end_clean();
-	
-	return $contents;
 }
 
 function add_http($url){

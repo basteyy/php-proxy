@@ -3,10 +3,22 @@
 namespace Proxy\Plugin;
 
 use Proxy\Event\ProxyEvent;
+use ProxyApp\Helper\RenderHelper;
 
 abstract class AbstractPlugin {
-	
-	// apply these methods only to those events whose request URL passes this filter
+
+    private RenderHelper $renderHelper;
+
+    public function __construct(RenderHelper $renderHelper)
+    {
+        $this->renderHelper = $renderHelper;
+    }
+
+    public function getRenderHelper() : RenderHelper {
+        return $this->renderHelper;
+    }
+
+    // apply these methods only to those events whose request URL passes this filter
 	protected $url_pattern;
 	
 	public function onBeforeRequest(ProxyEvent $event){
@@ -45,7 +57,8 @@ abstract class AbstractPlugin {
 	}
 	
 	// dispatch based on filter
-	private function route($event_name, ProxyEvent $event){
+	private function route($event_name, ProxyEvent $event): void
+    {
 		$url = $event['request']->getUri();
 		
 		// url filter provided and current request url does not match it
